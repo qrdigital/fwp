@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWP | Future World Products</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <!-- Google Fonts para tipografía premium y minimalista -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #111111;
+            line-height: 1.6;
+        }
+
+        /* Barra de scroll lateral sofisticada (Celeste Neón Difuminado) */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00f2fe 0%, #4facfe 100%);
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Contenedor Móvil Minimalista */
+        .wrapper {
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Navbar limpio basado en imagen_ff4f3c.jpg */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            background: #ffffff;
+        }
+
+        nav img {
+            height: 28px;
+            object-fit: contain;
+        }
+
+        /* Hero / Cabecera Emocional */
+        header {
+            position: relative;
+            background-image: url('hero-bg.jpg'); /* Imagen de fondo estilo aspiracional */
+            background-size: cover;
+            background-position: center;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px 24px;
+            color: #ffffff;
+        }
+
+        /* Capa sutil de sombreado inferior para legibilidad */
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        header .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 26px;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 16px; /* Ajuste: Frase secundaria más grande */
+            color: rgba(255,255,255,0.95);
+            font-weight: 500;
+        }
+
+        /* Pilares de Confianza Sutiles con Iconos */
+        .trust-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 16px;
+            background-color: #fafafa;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 9.5px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #555555;
+            font-weight: 600;
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            gap: 6px;
+        }
+
+        .trust-item svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: #4facfe;
+            stroke-width: 2;
+        }
+
+        .section-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888888;
+            padding: 35px 24px 10px 24px;
+            font-weight: 500;
+        }
+
+        /* Tarjeta de Producto Estilo Boutique */
+        .product-card {
+            margin-bottom: 45px;
+            padding: 0 24px;
+        }
+
+        .img-container {
+            position: relative;
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #f7f7f7;
+            margin-bottom: 18px;
+        }
+
+        .product-img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        /* Etiqueta flotante elegante para el Combo */
+        .badge-exclusive {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #111111;
+            color: #ffffff;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            font-weight: 500;
+            border-radius: 2px;
+        }
+
+        .product-card h2 {
+            font-size: 20px;
+            font-weight: 400;
+            color: #111111;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .product-promise {
+            font-size: 14px;
+            color: #555555;
+            font-weight: 400;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .features li {
+            font-size: 13px;
+            color: #777777;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: "—";
+            margin-right: 8px;
+            color: #cccccc;
+        }
+
+        /* Detalles de regalos añadidos al combo */
+        .gift-notice {
+            font-size: 12px;
+            color: #111111;
+            background: #f4f4f4;
+            padding: 10px 14px;
+            border-left: 2px solid #111111;
+            margin-bottom: 18px;
+            font-weight: 400;
+        }
+
+        .meta-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-current {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .price-original {
+            font-size: 13px;
+            color: #999999;
+            text-decoration: line-through;
+        }
+
+        /* Botón de Selección Minimalista */
+        .btn-select {
+            background: transparent;
+            color: #111111;
+            border: 1px solid #111111;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .btn-select.active {
+            background: #111111;
+            color: #ffffff;
+        }
+
+        /* Footer de Garantías */
+        .brand-footer {
+            background-color: #fafafa;
+            padding: 40px 24px;
+            margin-top: 20px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 12px;
+            color: #777777;
+        }
+
+        .brand-footer p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .brand-footer strong {
+            color: #111111;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Bloque Fijo de WhatsApp Elegante */
+        .action-bar {
+            position: sticky;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            border-top: 1px solid #eee;
+            z-index: 10;
+        }
+
+        .btn-cta {
+            width: 100%;
+            background: #25D366; /* Ajuste: Verde WhatsApp */
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 2px;
+            transition: background 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-cta:active {
+            background: #1ebd59;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+        <img src="logo.jpg" alt="FWP Future World Products">
+    </nav>
+
+    <!-- HERO PRINCIPAL -->
+    <header>
+        <div class="content">
+            <h1>¿Sientes que tu cuerpo va a otra velocidad?</h1>
+            <p>Recupera tu energía y balance diario.</p>
+        </div>
+    </header>
+
+    <!-- PILARES DE MARCA -->
+    <div class="trust-bar">
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
+            Calidad Certificada
+        </div>
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2.5 3.19-2.5 5.5h20c0-2.31-1-4.24-2.5-5.5"/><path d="M12 2v14"/><path d="M16 8v3"/><path d="M8 6v5"/></svg>
+            Ciencia Nutricional
+        </div>
+        <div class="trust-item">
+            <svg viewBox="0 0 24 24"><path d="m12 3-1.912 5.886H3.882l5.018 3.646L6.988 18.42 12 14.774l5.012 3.647-1.912-5.888 5.018-3.646h-6.206z"/></svg>
+            Fórmulas Evolucionadas
+        </div>
+    </div>
+
+    <!-- SECCIÓN: EXCLUSIVA -->
+    <div class="section-title">Promoción de Julio</div>
+    
+    <div class="product-card">
+        <div class="img-container">
+            <span class="badge-exclusive">Recomendado</span>
+            <img src="combo.jpg" alt="Combo Renova + Omega 360" class="product-img">
+        </div>
+        <h2>Combo: Renova + Omega 360</h2>
+        <p class="product-promise">Sinergia avanzada diseñada para rejuvenecer la estructura celular y proteger la lucidez mental.</p>
+        
+        <ul class="features">
+            <li>Estimula la elasticidad y firmeza cutánea profunda.</li>
+            <li>Disipa la fatiga cognitiva optimizando el enfoque.</li>
+        </ul>
+
+        <div class="gift-notice">
+            Por la orden de este combo: Delivery de cortesía a nivel nacional &amp; Tomatodo oficial FWP.
+        </div>
+
+        <div class="meta-container">
+            <div class="price-box">
+                <span class="price-original">S/. YYY</span>
+                <span class="price-current">S/. XXX</span>
+            </div>
+            <button class="btn-select" onclick="toggleItem(this, 'Combo Renova + Omega 360')">Seleccionar</button>
+        </div>
+    </div>
+
+    <!-- SECCIÓN: INDIVIDUALES -->
+    <div class="section-title">Suplementos Individuales</div>
+
+    <!-- RENOVA -->
+    <div class="product-card">
+        <div class="img-container">
+            <img src="renova.jpg" alt="FWP Renova" class="product-img">
+        </div>
+        <h2>RENOVA</h2>
+        <p class="product-promise">Devuelve a la piel la luminosidad y consistencia afectadas por el estrés oxidativo.</p>
+        <ul class="features">
+            <li>Asiste activamente en la regeneración celular.</li>
+        </ul>
+        <div class="meta-container">
+            <div class="price-box">
+                <span class="price-current">S/. XX</span>
+            </div>
+            <button class="btn-select" onclick="toggleItem(this, 'Renova')">Seleccionar</button>
+        </div>
+    </div>
+
+    <!-- OMEGA 360 -->
+    <div class="product-card">
+        <div class="img-container">
+            <img src="omega360.jpg" alt="FWP Omega 360" class="product-img">
+        </div>
+        <h2>OMEGA 360</h2>
+        <p class="product-promise">Protección integral cardiovascular y soporte de agilidad cognitiva libre de fatiga.</p>
+        <ul class="features">
+            <li>Colabora en la regulación lipídica y balance interno.</li>
+        </ul>
+        <div class="meta-container">
+            <div class="price-box">
+                <span class="price-current">S/. XX</span>
+            </div>
+            <button class="btn-select" onclick="toggleItem(this, 'Omega 360')">Seleccionar</button>
+        </div>
+    </div>
+
+    <!-- BOOST -->
+    <div class="product-card">
+        <div class="img-container">
+            <img src="eboost.jpg" alt="FWP Boost" class="product-img">
+        </div>
+        <h2>BOOST</h2>
+        <p class="product-promise">Energía limpia y enfoque sostenido para jornadas de alta exigencia, sin alteraciones.</p>
+        <ul class="features">
+            <li>Optimiza el rendimiento físico y mental de forma orgánica.</li>
+        </ul>
+        <div class="meta-container">
+            <div class="price-box">
+                <span class="price-current">S/. XX</span>
+            </div>
+            <button class="btn-select" onclick="toggleItem(this, 'Boost')">Seleccionar</button>
+        </div>
+    </div>
+
+    <!-- LIV -->
+    <div class="product-card">
+        <div class="img-container">
+            <img src="liv.jpg" alt="FWP Liiv" class="product-img">
+        </div>
+        <h2>LIV</h2>
+        <p class="product-promise">Equilibrio digestivo y desintoxicación orientados a recuperar la ligereza del organismo.</p>
+        <ul class="features">
+            <li>Soporte al sistema inmune mediante nutrientes esenciales.</li>
+        </ul>
+        <div class="meta-container">
+            <div class="price-box">
+                <span class="price-current">S/. XX</span>
+            </div>
+            <button class="btn-select" onclick="toggleItem(this, 'Liiv')">Seleccionar</button>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA RESPALDOS -->
+    <div class="brand-footer">
+        <p><strong>Garantía de Envío</strong> Envíos a nivel nacional con absoluta cobertura. Recibe tu pedido con seguridad y garantía oficial.</p>
+        <p><strong>Innovación y Respaldo FWP</strong> Biotecnología desarrollada con orgullo en Perú y formulada bajo los más altos estándares de exportación internacional.</p>
+        <p><strong>Calidad Certificada</strong> Cada lote pasa por un riguroso control de calidad, respaldado con registros sanitarios vigentes para tu total tranquilidad.</p>
+    </div>
+
+    <!-- ACCIÓN FIJA -->
+    <div class="action-bar">
+        <button class="btn-cta" onclick="processOrder()">
+            Solicitar Orden vía WhatsApp
+        </button>
+    </div>
+
+</div>
+
+<script>
+    let cart = [];
+
+    function toggleItem(element, name) {
+        if (cart.includes(name)) {
+            cart = cart.filter(i => i !== name);
+            element.classList.remove('active');
+            element.innerText = 'Seleccionar';
+        } else {
+            cart.push(name);
+            element.classList.add('active');
+            element.innerText = '✓ Añadido';
+        }
+    }
+
+    function processOrder() {
+        const phone = "51913642644";
+        let text = "";
+
+        if (cart.length > 0) {
+            text = "Hola, me interesa armar mi pedido de FWP. He seleccionado los siguientes productos en la web: " + cart.join(", ") + ". ¿Me ayudan a procesarlo?";
+        } else {
+            text = "Hola, estuve viendo la página de productos de FWP y me gustaría que un asesor me atienda para brindarme más información.";
+        }
+
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
