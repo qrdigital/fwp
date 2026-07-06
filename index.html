@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FWP | Future World Products</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <!-- Google Fonts para tipografía premium y minimalista -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -376,18 +375,117 @@
             border: none;
             background: none;
         }
+
+        /* NUEVO: Pestaña Flotante Lateral de Asesor */
+        .advisor-trigger {
+            position: fixed;
+            right: 0;
+            top: 35%;
+            transform: translateY(-50%);
+            background: #111111;
+            color: #ffffff;
+            writing-mode: vertical-rl;
+            text-orient: mixed;
+            padding: 15px 8px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 4px 0 0 4px;
+            cursor: pointer;
+            z-index: 40;
+            box-shadow: -2px 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-right: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* NUEVO: Cuadro Desplegable de Información del Consultor */
+        .advisor-card-modal {
+            background: #ffffff;
+            width: 85%;
+            max-width: 360px;
+            padding: 30px 24px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .lightbox-overlay.active .advisor-card-modal {
+            transform: scale(1);
+        }
+
+        .advisor-card-modal .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 16px auto;
+            display: block;
+            border: 2px solid #4facfe;
+            box-shadow: 0 4px 10px rgba(79, 172, 254, 0.2);
+        }
+
+        .advisor-card-modal h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111111;
+            margin-bottom: 4px;
+        }
+
+        .advisor-card-modal .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4facfe;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+
+        .advisor-card-modal p {
+            font-size: 13px;
+            color: #555555;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .advisor-card-modal .btn-contact-modal {
+            background: #111111;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            width: 100%;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .advisor-card-modal .btn-contact-modal:active {
+            background: #333333;
+        }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
 
-    <!-- BARRA DE NAVEGACIÓN -->
+    <div class="advisor-trigger" onclick="openAdvisorModal()">
+        Tu Asesora
+    </div>
+
     <nav>
         <img src="logo.jpg" alt="FWP Future World Products">
     </nav>
 
-    <!-- HERO PRINCIPAL -->
     <header>
         <div class="content">
             <h1>Dolor o disminución de la movilidad?</h1>
@@ -395,7 +493,6 @@
         </div>
     </header>
 
-    <!-- PILARES DE MARCA -->
     <div class="trust-bar">
         <div class="trust-item">
             <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
@@ -411,7 +508,6 @@
         </div>
     </div>
 
-    <!-- SECCIÓN: EXCLUSIVA -->
     <div class="section-title">Promoción de Julio</div>
     
     <div class="product-card">
@@ -440,10 +536,8 @@
         </div>
     </div>
 
-    <!-- SECCIÓN: INDIVIDUALES -->
     <div class="section-title">Suplementos Individuales</div>
 
-    <!-- RENOVA -->
     <div class="product-card">
         <div class="img-container" onclick="openLightbox('renova.jpg')">
             <img src="renova.jpg" alt="FWP Renova" class="product-img">
@@ -461,7 +555,6 @@
         </div>
     </div>
 
-    <!-- OMEGA 360 -->
     <div class="product-card">
         <div class="img-container" onclick="openLightbox('omega360.jpg')">
             <img src="omega360.jpg" alt="FWP Omega 360" class="product-img">
@@ -479,7 +572,6 @@
         </div>
     </div>
 
-    <!-- E-BOOST -->
     <div class="product-card">
         <div class="img-container" onclick="openLightbox('eboost.jpg')">
             <img src="eboost.jpg" alt="FWP Boost" class="product-img">
@@ -497,7 +589,6 @@
         </div>
     </div>
 
-    <!-- LIV -->
     <div class="product-card">
         <div class="img-container" onclick="openLightbox('liv.jpg')">
             <img src="liv.jpg" alt="FWP Liiv" class="product-img">
@@ -515,32 +606,30 @@
         </div>
     </div>
     
-    <!-- 24BURN -->
     <div class="product-card">
-        <div class="img-container" onclick="openLightbox('liv.jpg')">
-            <img src="24burn.jpg" alt="FWP Liiv" class="product-img">
+        <div class="img-container" onclick="openLightbox('24burn.jpg')">
+            <img src="24burn.jpg" alt="FWP 24Burn" class="product-img">
         </div>
         <h2>24BURN</h2>
         <p class="product-promise">Deja que tu cuerpo utilice sus reservas de forma más eficiente.</p>
         <ul class="features">
             <li>Impulsa el metabolismo.</li>
-            <li>Activa tu energía</li>
+            <li>Activa tu energía.</li>
         </ul>
         <div class="meta-container">
             <div class="price-box">
                 <span class="price-current">S/. XX</span>
             </div>
-            <button class="btn-select" onclick="toggleItem(this, 'Liiv')">Seleccionar</button>
+            <button class="btn-select" onclick="toggleItem(this, '24Burn')">Seleccionar</button>
         </div>
     </div>
-    <!-- PIE DE PÁGINA RESPALDOS -->
+
     <div class="brand-footer">
         <p><strong>Garantía de Envío</strong> Envíos a nivel nacional con absoluta cobertura. Recibe tu pedido con seguridad y garantía oficial.</p>
         <p><strong>Innovación y Respaldo FWP</strong> Biotecnología desarrollada con orgullo en Perú y formulada bajo los más altos estándares de exportación internacional.</p>
         <p><strong>Calidad Certificada</strong> Cada lote pasa por un riguroso control de calidad, respaldado con registros sanitarios vigentes para tu total tranquilidad.</p>
     </div>
 
-    <!-- ACCIÓN FIJA -->
     <div class="action-bar">
         <button class="btn-cta" onclick="processOrder()">
             Solicitar Orden vía WhatsApp
@@ -549,10 +638,18 @@
 
 </div>
 
-<!-- VENTANA MODAL PARA AMPLIACIÓN (LIGHTBOX) -->
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
     <button class="lightbox-close">&times;</button>
-    <img id="lightbox-img" class="lightbox-img" src="" alt="Vista ampliada">
+    
+    <img id="lightbox-img" class="lightbox-img" src="" alt="Vista ampliada" style="display: none;">
+    
+    <div id="advisor-card" class="advisor-card-modal" onclick="event.stopPropagation()" style="display: none;">
+        <img src="fotoperfil.jpg" alt="Kathe Pizarro" class="profile-img">
+        <h3>Kathe Pizarro</h3>
+        <span class="tag">Consultora FWP</span>
+        <p>Especialista en nutrición y salud de mujeres adultas. Lista para ayudarte a elegir la mejor combinación para tu bienestar.</p>
+        <button class="btn-contact-modal" onclick="closeLightbox()">Ver Catálogo</button>
+    </div>
 </div>
 
 <script>
@@ -583,11 +680,25 @@
         window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    /* Funciones para controlar la ampliación táctil de las imágenes */
+    /* Funciones para controlar los Modales (Imagen y Ficha de Asesor) */
     function openLightbox(src) {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
+        const advisorCard = document.getElementById('advisor-card');
+        
+        advisorCard.style.display = 'none';
+        lightboxImg.style.display = 'block';
         lightboxImg.src = src;
+        lightbox.classList.add('active');
+    }
+
+    function openAdvisorModal() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const advisorCard = document.getElementById('advisor-card');
+        
+        lightboxImg.style.display = 'none';
+        advisorCard.style.display = 'block';
         lightbox.classList.add('active');
     }
 
